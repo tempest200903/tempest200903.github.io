@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>note-d20141012</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="note-d20141012"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-05-09 16:42:56 JST"/>
+<meta name="author" content=""/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">note-d20141012</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 20141012-ガントチャート</a>
+<ul>
+<li><a href="#sec-1-1">1.1 目標</a></li>
+<li><a href="#sec-1-2">1.2 project</a></li>
+<li><a href="#sec-1-3">1.3 Lombok</a></li>
+<li><a href="#sec-1-4">1.4 UML Designer (Eclipse Luna version) 4.0</a></li>
+<li><a href="#sec-1-5">1.5 PlantUML</a></li>
+<li><a href="#sec-1-6">1.6 maven</a></li>
+<li><a href="#sec-1-7">1.7 class DateLinePainter</a></li>
+<li><a href="#sec-1-8">1.8 timelog</a></li>
+<li><a href="#sec-1-9">1.9 TimelineChart を縦横スクロール可能にする</a></li>
+<li><a href="#sec-1-10">1.10 TimelineChart の行のY座標とテーブルの行のY座標を合致させる</a></li>
+<li><a href="#sec-1-11">1.11 〔table に task duration, start date, finish date を表示する〕</a></li>
+<li><a href="#sec-1-12">1.12 〔TimelineChart に task bar を描画する〕</a></li>
+<li><a href="#sec-1-13">1.13 〔TaskEntity Duration, Start, Finish 計算アルゴリズム〕</a>
+<ul>
+<li><a href="#sec-1-13-1">1.13.1 〔AS<sub>SOON</sub><sub>AS</sub><sub>POSSIBLE</sub> を実装する〕</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-14">1.14 〔TaskEntity predecessors をテーブルに表示する〕</a></li>
+<li><a href="#sec-1-15">1.15 〔TaskEntity startDate, finishDate を変更して保存／復元する〕</a></li>
+<li><a href="#sec-1-16">1.16 splitPane の垂直スクロールを同期させる</a></li>
+<li><a href="#sec-1-17">1.17 Lombok toString() の問題点</a></li>
+<li><a href="#sec-1-18">1.18 ProjectEntity をファイルに出力する</a></li>
+<li><a href="#sec-1-19">1.19 memo</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 20141012-ガントチャート</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 目標</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<ul>
+<li>OpenProj / ProjectLibre より自分が使いやすいガントチャートアプリケーションを作る。
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> project</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<ul>
+<li>cd 'F:\goat-pc-data\ecworkspace'
+</li>
+<li>mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DgroupId=com.github.tempest200903 -DartifactId=20141012-ganttchart -DinteractiveMode=false
+</li>
+<li>cd 20141012-ganttchart
+</li>
+<li>mvn eclipse:eclipse
+</li>
+<li>git clone git@github.com:tempest200903/20141012-ganttchart.git
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Lombok</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<ul>
+<li><a href="http://ameblo.jp/principia-ca/entry-11562887744.html">http://ameblo.jp/principia-ca/entry-11562887744.html</a>
+<ul>
+<li>lombokで快適Java生活｜サイバーエージェント 公式エンジニアブログ
+</li>
+</ul>
+
+</li>
+<li>インストーラ実行。 eclipse.ini にVM引数を追加。
+</li>
+<li>pom.xml に dependency 追加。
+<blockquote>
+
+<p>&lt;dependency&gt;
+ &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+ &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+ &lt;version&gt;0.11.8&lt;/version&gt;
+&lt;/dependency&gt;
+</p>
+</blockquote>
+
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> UML Designer (Eclipse Luna version) 4.0</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<ul>
+<li>Eclipse Market にて "UML Designer (Eclipse Luna version) 4.0" をインストール。
+</li>
+<li><a href="http://marketplace.eclipse.org/content/uml-designer-eclipse-luna-version?mpc=true&amp;mpc_state">http://marketplace.eclipse.org/content/uml-designer-eclipse-luna-version?mpc=true&amp;mpc_state</a>=#
+</li>
+<li>使用中止
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> PlantUML</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<ul>
+<li><a href="http://www.smartics.de/archives/1313">http://www.smartics.de/archives/1313</a>
+<ul>
+<li>Using PlantUML
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> maven</h3>
+<div class="outline-text-3" id="text-1-6">
+
+<ul>
+<li><span class="timestamp-wrapper"> <span class="timestamp">2014-10-19 日 15:35</span></span>
+<ul>
+<li>compiler verion 1.8 を指定すると、 mvn compile が失敗してしまう。原因不明。 version 1.7 なら失敗しない。
+</li>
+<li>C:\tool\Maven\apache-maven-3.1.1\bin\mvn
+</li>
+<li>export JAVA<sub>HOME</sub>="C:/Program Files/Java/jdk1.8.0<sub>20</sub>"
+</li>
+<li>set JAVA<sub>HOME</sub>=C:\Program Files\Java\jdk1.8.0<sub>20</sub>
+</li>
+<li>F:\goat-pc-data\ecworkspace\20141012-ganttchart\pom.xml
+</li>
+<li>解決できない。しばらく compiler verion 1.7 を使う。
+</li>
+</ul>
+
+</li>
+<li><span class="timestamp-wrapper"> <span class="timestamp">2014-11-03 月 21:47</span></span>
+<ul>
+<li>compiler verion 1.8 で mvn compile と Eclipse build ともに成功した。
+</li>
+<li><img src="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000466.jpg"  alt="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000466.jpg" />
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> class DateLinePainter</h3>
+<div class="outline-text-3" id="text-1-7">
+
+<ul>
+<li>type 1
+<ul>
+<li>1: 水 8 10, 木 9 10
+</li>
+<li>2: 0,2,4,6,8,10,12,14,16,18,20,22 (+2h)
+</li>
+</ul>
+
+</li>
+<li>type 2
+<ul>
+<li>1: 水 8 10, 木 9 10
+</li>
+<li>2: 0,6,12,18 (+6h)
+</li>
+</ul>
+
+</li>
+<li>type 3
+<ul>
+<li>1: 12 10 14, 19 10 14
+</li>
+<li>2: 日月火水木金土 (曜日)
+</li>
+</ul>
+
+</li>
+<li>type 4
+<ul>
+<li>1: 10 2014, 11 2014
+</li>
+<li>2: 7,10,13,16,19,21,24,27,30 (+3d)
+</li>
+</ul>
+
+</li>
+<li>type 5
+<ul>
+<li>1: 10 2014, 11 2014
+</li>
+<li>2: 05,12,19,26 (+7d)
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> <span class="done DONE">DONE</span> timelog</h3>
+<div class="outline-text-3" id="text-1-8">
+
+</div>
+
+</div>
+
+<div id="outline-container-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> <span class="done DONE">DONE</span> TimelineChart を縦横スクロール可能にする</h3>
+<div class="outline-text-3" id="text-1-9">
+
+<ul>
+<li><img src="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000460.jpg"  alt="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000460.jpg" />
+</li>
+<li><a href="file://f:/goat-pc-data/ecworkspace/20141012-ganttchart/src/main/java/com/github/tempest200903/ganttchart/gui/GanttFrame.java">F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\gui\GanttFrame.java</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> <span class="done DONE">DONE</span> TimelineChart の行のY座標とテーブルの行のY座標を合致させる</h3>
+<div class="outline-text-3" id="text-1-10">
+
+<ul>
+<li>案1.
+<ul>
+<li>テーブルの行のY座標を TimelineChart に渡す。
+</li>
+<li>どうやってテーブルの行のY座標を得る？
+<ul>
+<li><a href="http://docs.oracle.com/javase/jp/6/api/javax/swing/JTable.html#getRowHeight">http://docs.oracle.com/javase/jp/6/api/javax/swing/JTable.html#getRowHeight</a>()
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+<li><span class="timestamp-wrapper"> <span class="timestamp">2014-10-25 土 22:52</span></span> 完了。
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> <span class="done DONE">DONE</span> 〔table に task duration, start date, finish date を表示する〕</h3>
+<div class="outline-text-3" id="text-1-11">
+
+</div>
+
+</div>
+
+<div id="outline-container-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> <span class="done DONE">DONE</span> 〔TimelineChart に task bar を描画する〕</h3>
+<div class="outline-text-3" id="text-1-12">
+
+<ul>
+<li>未完成。
+<ul>
+<li><img src="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000461.jpg"  alt="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000461.jpg" />
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> <span class="todo TODO">TODO</span> 〔TaskEntity Duration, Start, Finish 計算アルゴリズム〕</h3>
+<div class="outline-text-3" id="text-1-13">
+
+<ul>
+<li>現状の問題点
+<ul>
+<li>Start, Finish を先に決めて Duration をあとから Finish - Start で算出するのではだめ。
+<ul>
+<li>なぜなら、 non-working time も Duration に含んでしまうから。
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+<li>改善案1
+<ol>
+<li>Duration を決める。
+</li>
+<li>TaskConstraintType に応じて、 Start か Finish どちらかを決める。前提: FS リンク。
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">AS<sub>SOON</sub><sub>AS</sub><sub>POSSIBLE</sub></td><td class="left">predecessors.finish を this.start に反映する</td></tr>
+<tr><td class="left">AS<sub>LATE</sub><sub>AS</sub><sub>POSSIBLE</sub></td><td class="left">successors.start を this.finish   に反映する</td></tr>
+<tr><td class="left">MUST<sub>START</sub><sub>ON</sub></td><td class="left">指定日時を this.start に反映する</td></tr>
+<tr><td class="left">MUST<sub>FINISH</sub><sub>ON</sub></td><td class="left">指定日時を this.finish に反映する</td></tr>
+<tr><td class="left">START<sub>NO</sub><sub>EARLIER</sub><sub>THAN</sub></td><td class="left">max( 指定日時, predecessors.finish ) を this.start に反映する</td></tr>
+<tr><td class="left">START<sub>NO</sub><sub>LATER</sub><sub>THAN</sub></td><td class="left">min( 指定日時, predecessors.finish ) を this.start に反映する</td></tr>
+<tr><td class="left">FINISH<sub>NO</sub><sub>EARLIER</sub><sub>THAN</sub></td><td class="left">max( 指定日時, successors.finish ) を this.finish に反映する</td></tr>
+<tr><td class="left">FINISH<sub>NO</sub><sub>LATER</sub><sub>THAN</sub></td><td class="left">min( 指定日時, successors.finish ) を this.finish に反映する</td></tr>
+</tbody>
+</table>
+
+</li>
+</ol>
+
+</li>
+<li><a href="file://f:/goat-pc-data/ecworkspace/20141012-ganttchart/src/main/java/com/github/tempest200903/ganttchart/entity/TaskEntity.java">F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\entity\TaskEntity.java</a>
+</li>
+</ul>
+
+
+</div>
+
+<div id="outline-container-1-13-1" class="outline-4">
+<h4 id="sec-1-13-1"><span class="section-number-4">1.13.1</span> <span class="done DONE">DONE</span> 〔AS<sub>SOON</sub><sub>AS</sub><sub>POSSIBLE</sub> を実装する〕</h4>
+<div class="outline-text-4" id="text-1-13-1">
+
+<ul>
+<li><code>[X]</code> getStartDate
+</li>
+<li><code>[X]</code> getFinishDate
+</li>
+<li><a href="file://f:/goat-pc-data/ecworkspace/20141012-ganttchart/src/main/java/com/github/tempest200903/ganttchart/entity/TaskConstraintType.java">F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\entity\TaskConstraintType.java</a>
+</li>
+<li>AS<sub>SOON</sub><sub>AS</sub><sub>POSSIBLE</sub> 計算式で start date を決定する。
+<ul>
+<li><img src="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000465.jpg"  alt="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000465.jpg" />
+<ul>
+<li>成功。
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+<ul>
+<li id="sec-1-13-1-1"><span class="done DONE">DONE</span> 〔TaskConstraintTypeAsSoonAsPossible のユニットテスト〕<br/>
+<ul>
+<li>TaskConstraintTypeAsSoonAsPossibleTest
+</li>
+</ul>
+
+</li>
+</ul>
+<ul>
+<li id="sec-1-13-1-2"><span class="done DONE">DONE</span> 〔Dateを検証するMatcherを利用する〕<br/>
+<ul>
+<li><a href="http://tsukaby.com/tech_blog/archives/297">http://tsukaby.com/tech_blog/archives/297</a>
+<ul>
+<li>assertEqualsするだけがJUnitじゃなかった！機能の紹介
+<blockquote>
+
+<p>Dateを検証するMatcherを公開している人がいるはずです。
+これは実際居て、以下にて公開されています。
+<a href="https://github.com/modularit/hamcrest-date">https://github.com/modularit/hamcrest-date</a>
+いやっほう！stewbisありがとう！Maven Centralにも登録されている！さらにBSDライセンスで僕たちは（比較的）自由だ！
+早速上記のサイト通りpom.xmlに依存ライブラリを追加し、hamcrest-dateを利用します。
+</p>
+</blockquote>
+
+
+</li>
+</ul>
+
+</li>
+<li><a href="https://github.com/eXparity/hamcrest-date">https://github.com/eXparity/hamcrest-date</a>
+</li>
+<li>F:\goat-pc-data\ecworkspace\20141012-ganttchart\pom.xml
+<blockquote>
+
+<p>&lt;dependency&gt;
+    &lt;groupId&gt;org.exparity&lt;/groupId&gt;
+    &lt;artifactId&gt;hamcrest-date&lt;/artifactId&gt;
+    &lt;version&gt;1.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+</p>
+</blockquote>
+
+
+</li>
+</ul>
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> <span class="done DONE">DONE</span> 〔TaskEntity predecessors をテーブルに表示する〕</h3>
+<div class="outline-text-3" id="text-1-14">
+
+<ul>
+<li><img src="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000462.jpg"  alt="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000462.jpg" />
+<ul>
+<li>未完成。 TaskDependency.toString() ではなく task number を表示するべき。
+</li>
+</ul>
+
+</li>
+<li><img src="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000464.jpg"  alt="file://f:/goat-pc-data/screenshot/2014/screenshot-g-000464.jpg" />
+<ul>
+<li>task number を表示した。
+</li>
+</ul>
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-15" class="outline-3">
+<h3 id="sec-1-15"><span class="section-number-3">1.15</span> <span class="todo TODO">TODO</span> 〔TaskEntity startDate, finishDate を変更して保存／復元する〕</h3>
+<div class="outline-text-3" id="text-1-15">
+
+</div>
+
+</div>
+
+<div id="outline-container-1-16" class="outline-3">
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> <span class="todo PENDING">PENDING</span> splitPane の垂直スクロールを同期させる</h3>
+<div class="outline-text-3" id="text-1-16">
+
+<ul>
+<li>splitPane の子要素で垂直スクロールしたら、他の子要素も同じ位置に垂直スクロールする。
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-17" class="outline-3">
+<h3 id="sec-1-17"><span class="section-number-3">1.17</span> <span class="todo PENDING">PENDING</span> Lombok toString() の問題点</h3>
+<div class="outline-text-3" id="text-1-17">
+
+<ul>
+<li>@Data class A { B b; } @Data class B { A a; } としたとき、 A.toString() で StackOverflowError が発生する？
+</li>
+<li>例
+  F:\goat-pc-data\ecworkspace\20141026-LombokExperimental\src\main\java\com\example\Main.java
+  実行すると StackOverflowError 発生。
+<blockquote>
+
+<p>Exception in thread "main" java.lang.StackOverflowError
+        at java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:422)
+        at java.lang.StringBuilder.append(StringBuilder.java:136)
+        at java.lang.StringBuilder.&lt;init&gt;(StringBuilder.java:113)
+        at com.example.B.toString(B.java:5)
+:&hellip;
+</p>
+</blockquote>
+
+
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-18" class="outline-3">
+<h3 id="sec-1-18"><span class="section-number-3">1.18</span> <span class="todo TODO">TODO</span> ProjectEntity をファイルに出力する</h3>
+<div class="outline-text-3" id="text-1-18">
+
+<ul>
+<li>目的はデバッグと保存復元。
+</li>
+<li>XMLEncoder を使うと不必要に public や setter を増やしてしまう。
+</li>
+<li>他の方法を探す。
+<ul>
+<li>Digester
+<ul>
+<li><a href="http://www.syboos.jp/java/doc/xml-to-java-object-by-digester.html?page=2">http://www.syboos.jp/java/doc/xml-to-java-object-by-digester.html?page=2</a>
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+<li>注意。 OutputStream および XMLEncoder を close しないとファイルは空になる。
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-19" class="outline-3">
+<h3 id="sec-1-19"><span class="section-number-3">1.19</span> memo</h3>
+<div class="outline-text-3" id="text-1-19">
+
+<ul>
+<li>copy f:/goat-pc-data/cloudsync/OneDrive/tempest200903.github.io/20141012-ganttchart/note-d20141012.org f:/goat-pc-data/mydropbox/Dropbox/trunksync/notes/20141012-ガントチャート.org.txt
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-05-09 16:42:56 JST</p>
+<p class="author">Author: </p>
+<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+* 20141012-ガントチャート
+** 目標
+- OpenProj / ProjectLibre より自分が使いやすいガントチャートアプリケーションを作る。
+** project
+- cd 'F:\goat-pc-data\ecworkspace'
+- mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DgroupId=com.github.tempest200903 -DartifactId=20141012-ganttchart -DinteractiveMode=false
+- cd 20141012-ganttchart
+- mvn eclipse:eclipse
+- git clone git@github.com:tempest200903/20141012-ganttchart.git
+** Lombok
+- http://ameblo.jp/principia-ca/entry-11562887744.html
+  - lombokで快適Java生活｜サイバーエージェント 公式エンジニアブログ
+- インストーラ実行。 eclipse.ini にVM引数を追加。
+- pom.xml に dependency 追加。
+  #+BEGIN_QUOTE
+    <dependency>
+     <groupId>org.projectlombok</groupId>
+     <artifactId>lombok</artifactId>
+     <version>0.11.8</version>
+    </dependency>
+  #+END_QUOTE
+** UML Designer (Eclipse Luna version) 4.0
+- Eclipse Market にて "UML Designer (Eclipse Luna version) 4.0" をインストール。
+- http://marketplace.eclipse.org/content/uml-designer-eclipse-luna-version?mpc=true&mpc_state=#
+- 使用中止
+** PlantUML
+- http://www.smartics.de/archives/1313
+  - Using PlantUML
+** maven
+- [2014-10-19 日 15:35]
+  - compiler verion 1.8 を指定すると、 mvn compile が失敗してしまう。原因不明。 version 1.7 なら失敗しない。
+  - C:\tool\Maven\apache-maven-3.1.1\bin\mvn
+  - export JAVA_HOME="C:/Program Files/Java/jdk1.8.0_20"
+  - set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_20
+  - F:\goat-pc-data\ecworkspace\20141012-ganttchart\pom.xml
+  - 解決できない。しばらく compiler verion 1.7 を使う。
+- [2014-11-03 月 21:47]
+  - compiler verion 1.8 で mvn compile と Eclipse build ともに成功した。
+  - [[F:\goat-pc-data\screenshot\2014\screenshot-g-000466.jpg]]
+** class DateLinePainter
+- type 1
+  - 1: 水 8 10, 木 9 10
+  - 2: 0,2,4,6,8,10,12,14,16,18,20,22 (+2h)
+- type 2
+  - 1: 水 8 10, 木 9 10
+  - 2: 0,6,12,18 (+6h)
+- type 3
+  - 1: 12 10 14, 19 10 14
+  - 2: 日月火水木金土 (曜日)
+- type 4
+  - 1: 10 2014, 11 2014
+  - 2: 7,10,13,16,19,21,24,27,30 (+3d)
+- type 5
+  - 1: 10 2014, 11 2014
+  - 2: 05,12,19,26 (+7d)
+** DONE timelog
+   :LOGBOOK:
+   CLOCK: [2014-10-23 木 23:26]--[2014-10-23 木 23:36] =>  0:10
+   CLOCK: [2014-10-19 日 15:35]--[2014-10-19 日 17:25] =>  1:50
+   :END:
+** DONE TimelineChart を縦横スクロール可能にする
+   :LOGBOOK:
+   CLOCK: [2014-10-23 木 23:36]--[2014-10-24 金 00:06] =>  0:30
+   :END:
+- [[file:F:\goat-pc-data\screenshot\2014\screenshot-g-000460.jpg]]
+- [[F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\gui\GanttFrame.java]]
+** DONE TimelineChart の行のY座標とテーブルの行のY座標を合致させる
+   :LOGBOOK:
+   CLOCK: [2014-10-25 土 22:26]--[2014-10-25 土 22:45] =>  0:19
+   CLOCK: [2014-10-25 土 17:05]--[2014-10-25 土 17:42] =>  0:37
+   CLOCK: [2014-10-24 金 00:06]--[2014-10-24 金 00:17] =>  0:11
+   :END:
+- 案1.
+  - テーブルの行のY座標を TimelineChart に渡す。
+  - どうやってテーブルの行のY座標を得る？
+    - http://docs.oracle.com/javase/jp/6/api/javax/swing/JTable.html#getRowHeight()
+- [2014-10-25 土 22:52] 完了。
+** DONE 〔table に task duration, start date, finish date を表示する〕
+   :LOGBOOK:
+   CLOCK: [2014-10-25 土 22:45]--[2014-10-25 土 22:58] =>  0:13
+   :END:
+** DONE 〔TimelineChart に task bar を描画する〕
+   :LOGBOOK:
+   CLOCK: [2014-10-26 日 16:49]--[2014-10-26 日 17:01] =>  0:12
+   CLOCK: [2014-10-25 土 22:58]--[2014-10-25 土 23:45] =>  0:47
+   :END:
+- 未完成。
+  - [[F:\goat-pc-data\screenshot\2014\screenshot-g-000461.jpg]]
+** TODO 〔TaskEntity Duration, Start, Finish 計算アルゴリズム〕
+   :LOGBOOK:
+   CLOCK: [2014-10-26 日 17:02]--[2014-10-26 日 17:28] =>  0:26
+   CLOCK: [2014-10-25 土 23:45]--[2014-10-25 土 23:55] =>  0:10
+   :END:
+- 現状の問題点
+  - Start, Finish を先に決めて Duration をあとから Finish - Start で算出するのではだめ。
+    - なぜなら、 non-working time も Duration に含んでしまうから。
+- 改善案1
+  1. Duration を決める。
+  2. TaskConstraintType に応じて、 Start か Finish どちらかを決める。前提: FS リンク。
+     | AS_SOON_AS_POSSIBLE    | predecessors.finish を this.start に反映する                  |
+     | AS_LATE_AS_POSSIBLE    | successors.start を this.finish   に反映する                  |
+     | MUST_START_ON          | 指定日時を this.start に反映する                              |
+     | MUST_FINISH_ON         | 指定日時を this.finish に反映する                             |
+     | START_NO_EARLIER_THAN  | max( 指定日時, predecessors.finish ) を this.start に反映する |
+     | START_NO_LATER_THAN    | min( 指定日時, predecessors.finish ) を this.start に反映する |
+     | FINISH_NO_EARLIER_THAN | max( 指定日時, successors.finish ) を this.finish に反映する  |
+     | FINISH_NO_LATER_THAN   | min( 指定日時, successors.finish ) を this.finish に反映する  |
+- [[F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\entity\TaskEntity.java]]
+*** DONE 〔AS_SOON_AS_POSSIBLE を実装する〕
+   :LOGBOOK:
+   CLOCK: [2014-11-03 月 21:43]--[2014-11-03 月 22:11] =>  0:28
+   CLOCK: [2014-11-02 日 23:15]--[2014-11-02 日 23:25] =>  0:10
+   CLOCK: [2014-10-26 日 17:28]--[2014-10-26 日 18:08] =>  0:40
+   :END:
+- [X] getStartDate
+- [X] getFinishDate
+- [[F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\entity\TaskConstraintType.java]]
+- AS_SOON_AS_POSSIBLE 計算式で start date を決定する。
+  - [[F:\goat-pc-data\screenshot\2014\screenshot-g-000465.jpg]]
+    - 成功。
+**** DONE 〔TaskConstraintTypeAsSoonAsPossible のユニットテスト〕
+     :LOGBOOK:
+     CLOCK: [2014-11-03 月 21:33]--[2014-11-03 月 21:43] =>  0:10
+     CLOCK: [2014-11-03 月 21:13]--[2014-11-03 月 21:23] =>  0:10
+     CLOCK: [2014-11-02 日 23:25]--[2014-11-02 日 23:38] =>  0:13
+     :END:
+- TaskConstraintTypeAsSoonAsPossibleTest
+**** DONE 〔Dateを検証するMatcherを利用する〕
+     :LOGBOOK:
+     CLOCK: [2014-11-03 月 21:23]--[2014-11-03 月 21:33] =>  0:10
+     :END:
+- http://tsukaby.com/tech_blog/archives/297
+  - assertEqualsするだけがJUnitじゃなかった！機能の紹介
+    #+BEGIN_QUOTE
+    Dateを検証するMatcherを公開している人がいるはずです。
+    これは実際居て、以下にて公開されています。
+    https://github.com/modularit/hamcrest-date
+    いやっほう！stewbisありがとう！Maven Centralにも登録されている！さらにBSDライセンスで僕たちは（比較的）自由だ！
+    早速上記のサイト通りpom.xmlに依存ライブラリを追加し、hamcrest-dateを利用します。
+    #+END_QUOTE
+- https://github.com/eXparity/hamcrest-date
+- F:\goat-pc-data\ecworkspace\20141012-ganttchart\pom.xml
+  #+BEGIN_QUOTE
+  <dependency>
+      <groupId>org.exparity</groupId>
+      <artifactId>hamcrest-date</artifactId>
+      <version>1.0.1</version>
+  </dependency>
+  #+END_QUOTE
+** DONE 〔TaskEntity predecessors をテーブルに表示する〕
+   :LOGBOOK:
+   CLOCK: [2014-10-26 日 21:07]--[2014-10-26 日 22:15] =>  1:08
+   CLOCK: [2014-10-26 日 18:08]--[2014-10-26 日 18:14] =>  0:06
+   :END:
+- [[F:\goat-pc-data\screenshot\2014\screenshot-g-000462.jpg]]
+  - 未完成。 TaskDependency.toString() ではなく task number を表示するべき。
+- [[F:\goat-pc-data\screenshot\2014\screenshot-g-000464.jpg]]
+  - task number を表示した。
+** TODO 〔TaskEntity startDate, finishDate を変更して保存／復元する〕
+   :LOGBOOK:
+   CLOCK: [2014-10-26 日 17:01]--[2014-10-26 日 17:02] =>  0:01
+   :END:
+** PENDING splitPane の垂直スクロールを同期させる
+- splitPane の子要素で垂直スクロールしたら、他の子要素も同じ位置に垂直スクロールする。
+** PENDING Lombok toString() の問題点
+- @Data class A { B b; } @Data class B { A a; } としたとき、 A.toString() で StackOverflowError が発生する？
+- 例
+  F:\goat-pc-data\ecworkspace\20141026-LombokExperimental\src\main\java\com\example\Main.java
+  実行すると StackOverflowError 発生。
+  #+BEGIN_QUOTE
+  Exception in thread "main" java.lang.StackOverflowError
+          at java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:422)
+          at java.lang.StringBuilder.append(StringBuilder.java:136)
+          at java.lang.StringBuilder.<init>(StringBuilder.java:113)
+          at com.example.B.toString(B.java:5)
+  :...
+  #+END_QUOTE
+** TODO ProjectEntity をファイルに出力する
+   :LOGBOOK:
+   CLOCK: [2014-11-02 日 23:10]--[2014-11-02 日 23:15] =>  0:05
+   :END:
+- 目的はデバッグと保存復元。
+- XMLEncoder を使うと不必要に public や setter を増やしてしまう。
+- 他の方法を探す。
+  - Digester
+    - http://www.syboos.jp/java/doc/xml-to-java-object-by-digester.html?page=2
+- 注意。 OutputStream および XMLEncoder を close しないとファイルは空になる。
+** memo
+- copy f:/goat-pc-data/cloudsync/OneDrive/tempest200903.github.io/20141012-ganttchart/note-d20141012.org f:/goat-pc-data/mydropbox/Dropbox/trunksync/notes/20141012-ガントチャート.org.txt
