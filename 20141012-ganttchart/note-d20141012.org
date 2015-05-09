@@ -36,7 +36,7 @@
   - 解決できない。しばらく compiler verion 1.7 を使う。
 - [2014-11-03 月 21:47]
   - compiler verion 1.8 で mvn compile と Eclipse build ともに成功した。
-  - [[F:\goat-pc-data\screenshot\2014\screenshot-g-000466.jpg]]
+  - [[file:images/screenshot-g-000466.jpg]]
 ** class DateLinePainter
 - type 1
   - 1: 水 8 10, 木 9 10
@@ -62,7 +62,7 @@
    :LOGBOOK:
    CLOCK: [2014-10-23 木 23:36]--[2014-10-24 金 00:06] =>  0:30
    :END:
-- [[file:F:\goat-pc-data\screenshot\2014\screenshot-g-000460.jpg]]
+- [[file:images/screenshot-g-000460.jpg]]
 - [[F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\gui\GanttFrame.java]]
 ** DONE TimelineChart の行のY座標とテーブルの行のY座標を合致させる
    :LOGBOOK:
@@ -85,7 +85,7 @@
    CLOCK: [2014-10-25 土 22:58]--[2014-10-25 土 23:45] =>  0:47
    :END:
 - 未完成。
-  - [[F:\goat-pc-data\screenshot\2014\screenshot-g-000461.jpg]]
+  - [[file:images/screenshot-g-000461.jpg]]
 ** TODO 〔TaskEntity Duration, Start, Finish 計算アルゴリズム〕
    :LOGBOOK:
    CLOCK: [2014-10-26 日 17:02]--[2014-10-26 日 17:28] =>  0:26
@@ -116,7 +116,7 @@
 - [X] getFinishDate
 - [[F:\goat-pc-data\ecworkspace\20141012-ganttchart\src\main\java\com\github\tempest200903\ganttchart\entity\TaskConstraintType.java]]
 - AS_SOON_AS_POSSIBLE 計算式で start date を決定する。
-  - [[F:\goat-pc-data\screenshot\2014\screenshot-g-000465.jpg]]
+  - [[file:images/screenshot-g-000465.jpg]]
     - 成功。
 **** DONE 〔TaskConstraintTypeAsSoonAsPossible のユニットテスト〕
      :LOGBOOK:
@@ -152,9 +152,9 @@
    CLOCK: [2014-10-26 日 21:07]--[2014-10-26 日 22:15] =>  1:08
    CLOCK: [2014-10-26 日 18:08]--[2014-10-26 日 18:14] =>  0:06
    :END:
-- [[F:\goat-pc-data\screenshot\2014\screenshot-g-000462.jpg]]
+- [[file:images/screenshot-g-000462.jpg]]
   - 未完成。 TaskDependency.toString() ではなく task number を表示するべき。
-- [[F:\goat-pc-data\screenshot\2014\screenshot-g-000464.jpg]]
+- [[file:images/screenshot-g-000464.jpg]]
   - task number を表示した。
 ** TODO 〔TaskEntity startDate, finishDate を変更して保存／復元する〕
    :LOGBOOK:
@@ -187,3 +187,7 @@
 - 注意。 OutputStream および XMLEncoder を close しないとファイルは空になる。
 ** memo
 - copy f:/goat-pc-data/cloudsync/OneDrive/tempest200903.github.io/20141012-ganttchart/note-d20141012.org f:/goat-pc-data/mydropbox/Dropbox/trunksync/notes/20141012-ガントチャート.org.txt
+** issue #1
+- https://github.com/tempest200903/20141012-ganttchart/issues/1
+- duration の単位を日(day)にする · Issue #1 · tempest200903/20141012-ganttchart
+
